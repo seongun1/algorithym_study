@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class student_sort {
+	string student;
+	int score;
+public:
+	student_sort(string a, int n) { student = a; score = n; }
+	string get_student() { return student; }
+
+	bool operator < (student_sort& a)
+	{
+		return score < a.score;
+	}
+};
+vector <student_sort> v;
+int main() {
+	int N;
+	cin >> N;
+	string name;
+	int s;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> name >> s;
+		v.push_back(student_sort(name, s));
+	}
+
+	sort(v.begin(), v.end());
+	for (int i = 0; i < N; i++) {
+		cout << v[i].get_student() << " ";
+	}
+}
