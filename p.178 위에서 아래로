@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+int a[501] = { 0 };
+void quicksort(int *a, int first, int last)
+{
+	int pivot = first;
+	int left = first;
+	int right = last;
+	if (first >= last) return;
+	while (left <= right) {
+		while (a[left] >= a[pivot] && left <= last) left++;
+		while (a[right] <= a[pivot] && right > first) right--;
+		if (left > right) swap(a[pivot], a[right]);
+		else swap(a[left], a[right]);
+		quicksort(a, first, pivot - 1);
+		quicksort(a, pivot + 1, last);
+	}
+}
+
+int main() {
+	int N; // 수열의 수의 갯수
+	cin >> N;
+	int k;
+	for (int i = 0; i < N; i++)
+	{
+		cin >> k;
+		a[i] = k;
+	}
+	quicksort(a, 0, N - 1);
+	for (int i = 0; i < N; i++)
+	{
+		cout << a[i] << " ";
+	}
+}
