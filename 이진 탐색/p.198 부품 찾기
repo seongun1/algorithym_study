@@ -1,0 +1,50 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int N;
+vector <int> n;
+int M;
+vector <int> m;
+
+int binary_search(vector <int>& a, int target, int first, int last)
+{
+	if (first > last)  return -1;
+	while (first <= last)
+	{
+		int middle = (first + last) / 2;
+		if (target == a[middle])
+			return 1;
+		else if (a[middle] > target)
+			last = middle - 1;
+		else if (a[middle] < target)
+			first = middle + 1;
+	}
+	return -1;
+}
+
+int main() {
+	cin >> N;
+	for (int i = 0; i < N; i++)
+	{
+		int x;
+		cin >> x;
+		n.push_back(x);
+	}
+	cin >> M;
+	for (int i = 0; i < M; i++)
+	{
+		int x;
+		cin >> x;
+		m.push_back(x);
+	}
+	sort(n.begin(), n.end());
+	for (int i = 0; i < M; i++)
+	{
+		int answer = binary_search(n, m[i], 0, N - 1);
+		if (answer == -1)
+			cout << "NO"<< endl;
+		else if (answer == 1)
+			cout << "yes"<< endl;
+	}
+}
