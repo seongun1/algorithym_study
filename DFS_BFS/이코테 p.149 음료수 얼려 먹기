@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+vector <vector<bool>> b;
+int go_y[4]={1,0,-1,0};
+int go_x[4]={0,1,0,-1};
+int N, M; 
+bool DFS(int p, int q) // 세로 길이가 N이고, 가로 길이가 M 이므로, p 는 y의 역할 (수직)을 하고, q는 x의 역할(수평)을 한다.
+{	
+	if (p < 0 || p >= N|| q <0 || q >= M || b[p][q]) {
+		return false;
+	}
+	if (b[p][q] == true) {
+		return false;
+	}
+	b[p][q] = true;
+	for (int i = 0; i < 4; i++)
+	{
+		DFS(p + go_y[i], q + go_x[i]);
+	}
+	return true;
+}
+int main() {
+	// 세로 길이 N , 가로 길이 M
+	//얼음 틀 구하기
+	cin >> N >> M;
+	b.resize(N, vector<bool>(M, false));
+	// 얼음 틀 구하기
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < M; j++)
+		{
+			char x;
+			cin >> x;
+			if (x == '1')
+				b[i][j] = true;
+		}
+		//칸막이가 존재하는 부분이 true
+	}
+	int count=0;
+	// 조건이 맞는 지 수행
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (DFS(i, j) == true) // 칸막이가 존재 한다면, count를 늘린다.
+				count++;
+		}
+	}
+	cout << count << '\n';
+}
