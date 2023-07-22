@@ -1,0 +1,19 @@
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+#모든 시각 중에서 3이 하나라도 포함되는 모든 경우의 수를 출력
+h,m,s =0,0,0
+count =0
+while h <N+1:
+    s+=1
+    if s == 60:
+        m +=1
+        s=0
+    if m == 60:
+        h +=1
+        m =0
+    if '3' in str(m) + str(s) + str(h): # 세 개의 시간/분/초를 합친다. 예를 들어 03시06분25초라면 030625로 변환하여 판단.
+        count +=1
+
+print(count)
