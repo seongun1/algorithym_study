@@ -1,0 +1,46 @@
+import sys
+sys = sys.stdin.readline
+
+def turn_left():
+    global d
+    d +=1
+    if d==4:
+        d =0
+
+dx =[0,-1,0,1] #북 서 남 동 (시계 반대 방향으로 회전)
+dy =[-1,0,1,0] 
+N,M= map(int,input().split()) # 세로 크기 N 가로 크기 M
+A,B,d = map(int,input().split())
+
+game_map = [[1 for i in range(M)]for j in range(N)] 
+visit_map =[[False for i in range(M)] for j in range(N)]
+visit_map[B][A] =True
+for i in range(N):
+    game_map[i] =(list(map(int,input().split())))
+
+turn_count =0 # 북서남동을 보는 횟수
+count =1 # 방문한 칸의 수(처음에 한 칸을 방문했기 때문에 한 칸으로 시작)
+while True:
+    turn_left()
+    nx = A + dx[d]
+    ny = B + dy[d]
+    if visit_map[ny][nx] == False and game_map[ny][nx] == 0:
+        visit_map[ny][nx] = True # 방문 표시
+        A = nx
+        B = ny
+        turn_count =0
+        count +=1
+        continue
+    else:
+        turn_count +=1
+    if turn_count ==4:
+        nx = A - dx[d]
+        ny = B - dy[d]
+        if game_map[ny][nx] == 0:
+            A = nx
+            B = ny
+        else:
+            break
+        turn_count =0
+
+print(count)
