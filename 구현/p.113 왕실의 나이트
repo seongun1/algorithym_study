@@ -1,0 +1,19 @@
+import sys
+input = sys.stdin.readline
+
+dx =[2,2,-2,-2,1,-1,1,-1]
+dy = [-1,1,-1,1,2,2,-2,-2]
+count =0
+chess = [[0 for i in range (8)]for j in range (8)] # 8X8
+pos = input()
+column = int(ord(pos[0]) - ord('a'))+1
+x= column
+y= int(pos[1])
+for i in range (8):
+    nx = x + dx[i]
+    ny = y + dy[i]
+    if nx >8 or nx <1 or ny >8 or ny <1:
+        continue
+    count +=1
+
+print(count)
