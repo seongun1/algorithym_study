@@ -1,0 +1,20 @@
+import sys
+input = sys.stdin.readline
+
+N = int(input()) #공간의 크기
+enter = input().split()
+mx = [1,-1,0,0]
+my = [0,0,1,-1]
+arr =[[0 for j in range(len(enter))]for i in range(len(enter))]
+
+x,y =1,1
+for i in range(len(enter)):
+    if enter[i] =='R' and x<N:
+        x+=1
+    elif enter[i] == 'L' and x>1:
+        x-=1
+    elif enter[i] == 'U' and y>1:
+        y-=1
+    elif enter[i] == 'D' and y<N:
+        y+=1
+print(y,x)
